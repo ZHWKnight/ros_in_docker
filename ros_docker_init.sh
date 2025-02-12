@@ -11,9 +11,9 @@ else
     --user=$(id -u $USER):$(id -g $USER) \
     --env="DISPLAY" \
     --ene="QT_X11_NO_MITSHM=1" \
-    --workdir="/home/$USER" \
+    --workdir="/$HOME/Worksp/ros1_ws" \
     --network host \
-    --volume="/home/$USER:/home/$USER" \
+    --volume="/$HOME/Worksp/ros1_ws:/$HOME/Worksp/ros1_ws" \
     --volume="/etc/group:/etc/group:ro" \
     --volume="/etc/passwd:/etc/passwd:ro" \
     --volume="/etc/shadow:/etc/shadow:ro" \
