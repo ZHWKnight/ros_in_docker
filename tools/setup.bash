@@ -32,8 +32,9 @@ sudo gpg --export C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654 | sudo tee /usr/share
 sudo sh -c 'echo "deb [signed-by=/usr/share/keyrings/ros.gpg] https://mirrors.ustc.edu.cn/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros1-latest.list'
 
 sudo apt update
-sudo apt install iputils-ping wget curl vim git cmake build-essential python3-catkin-tools python3-rosdep
+sudo apt install -y iputils-ping wget curl vim git cmake build-essential python3-catkin-tools python3-rosdep
 
 cd ~/Worksp/ros1_ws/
 catkin init
-catk build
+catkin build
+. $HOME/.bashrc
