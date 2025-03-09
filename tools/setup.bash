@@ -33,6 +33,7 @@ sudo apt install -y \
     iputils-ping \
     wget \
     curl \
+    iproute2 \
     vim \
     git \
     cmake \

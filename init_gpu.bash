@@ -8,15 +8,10 @@ else
   echo "now init docker container $CONTAINER_NAME..."
   docker run -itd \
     --name=$CONTAINER_NAME \
-    --user=$(id -u $USER):$(id -g $USER) \
     --env="ROS_IN_DOCKER=1" \
+    --workdir="$HOME" \
     --network host \
-    --volume="/etc/group:/etc/group:ro" \
-    --volume="/etc/passwd:/etc/passwd:ro" \
-    --volume="/etc/shadow:/etc/shadow:ro" \
-    --volume="/etc/sudoers.d:/etc/sudoers.d:ro" \
-    --volume="$HOME/Worksp/ros1_ws:$HOME/Worksp/ros1_ws:rw" \
-    --workdir="$HOME/Worksp" \
+    --ipc="host" \
     --runtime=nvidia \
     --gpus all \
     --restart=unless-stopped \

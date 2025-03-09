@@ -9,9 +9,9 @@ else
   docker run -itd \
     --name=$CONTAINER_NAME \
     --env="ROS_IN_DOCKER=1" \
+    --workdir="$HOME" \
     --network host \
-    --volume="$HOME/Worksp/ros1_ws:$HOME/Worksp/ros1_ws:rw" \
-    --workdir="$HOME/Worksp" \
+    --ipc="host" \
     --restart=unless-stopped \
     osrf/ros:noetic-desktop-full \
     bash
