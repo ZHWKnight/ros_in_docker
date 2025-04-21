@@ -1,14 +1,17 @@
 #!/bin/bash
 
-CONTAINER_NAME="ros1_noetic"
+. "tools/tools.bash"
 
-export containerId=$(docker ps -l -q)
-export x11_hostname=$(docker inspect --format='{{ .Config.Hostname }}' $containerId)
+container_name=$(list_ros_containers)
+
+container_id=$(docker ps -q -f "name=$container_name")
+x11_hostname=$(docker inspect --format='{{ .Config.Hostname }}' $container_id)
+
 xhost +local:$x11_hostname
 
-if docker ps --filter "name=$CONTAINER_NAME" --filter "status=exited" | grep -q "$CONTAINER_NAME"; then
-  echo "ros docker container: $CONTAINER_NAME was exited ... now starting"
-  docker start $CONTAINER_NAME
+if docker ps --filter "name=$container_name" --filter "status=exited" | grep -q "$container_name"; then
+  echo "ros docker container: $container_name was exited ... now starting"
+  docker start $container_name
 fi
 
-docker exec -it $CONTAINER_NAME bash
+docker exec -it $container_name bash
