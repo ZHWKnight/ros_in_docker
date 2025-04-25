@@ -29,7 +29,7 @@ function select_ros_version() {
 }
 
 function list_ros_containers() {
-  local container_names=$(docker ps --filter "name=^ros_" --format '{{.Names}}')
+  local container_names=$(docker ps -a --filter "name=^ros_" --format '{{.Names}}')
 
   if [ -z "$container_names" ]; then
     echo "ERROR: No containers found, docker ros container's name starting with 'ros_'." >&2
