@@ -1,24 +1,47 @@
 #!/bin/bash
 
-function select_ros_version() {
-  local ros_versions=("noetic" "humble" "jazzy")
+function ask_yes_no() {
+  local prompt="$1"
+  local default="${2:-}"
 
-  echo "Please select a ROS version:" >&2
-  select ros_version in "${ros_versions[@]}"; do
-    # if [[ -n "$ros_version" ]]; then
-    #   echo "You selected ROS version: $ros_version" >&2
-    #   break
-    # else
-    #   echo "Invalid selection" >&2
-    # fi
-    [ -n "$ros_version" ] && break
+  while true; do
+    read -p "$prompt default is $default (Yes/no): " answer
+    case "${answer:-$default}" in
+    [Yy] | [Yy][Ee][Ss])
+      echo "true"
+      local result="true"
+      break
+      ;;
+    [Nn] | [Nn][Oo])
+      echo "false"
+      local result="false"
+      break
+      ;;
+    *)
+      echo "Please answer Yes/no" >&2
+      ;;
+    esac
+  done
+
+  echo "INFO: User selected: $result" >&2
+}
+
+function select_ros_distro() {
+  local ros_distros=("noetic" "humble" "jazzy")
+
+  echo "Please select a ROS LTS distro:" >&2
+  select ros_distro in "${ros_distros[@]}"; do
+    [ -n "$ros_distro" ] && break
     echo "Invalid selection" >&2
   done
-  echo "INFO: Selected ROS version: $ros_version" >&2
+  echo "INFO: Selected ROS distro: $ros_distro" >&2
+  printf '%s' "$ros_distro"
+}
 
-  local default_prefix=ros_${ros_version}
+function build_container_name() {
+  local default_prefix=ros_$1
 
-  read -p "Enter a container identifier (press Enter to use default: ${default_prefix}): " user_input >&2
+  read -p "Enter a container identifier if you want (${default_prefix}_<id>): " user_input >&2
   if [ -z "$user_input" ]; then
     container_name=${default_prefix}
   else

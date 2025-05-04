@@ -9,7 +9,7 @@ x11_hostname=$(docker inspect --format='{{ .Config.Hostname }}' $container_id)
 
 xhost +local:$x11_hostname
 
-if docker ps --filter "name=$container_name" --filter "status=exited" | grep -q "$container_name"; then
+if docker ps --filter "name=$container_name" --filter "status=exited" | grep -wq "$container_name"; then
   echo "ros docker container: $container_name was exited ... now starting"
   docker start $container_name
 fi
