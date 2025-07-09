@@ -44,20 +44,20 @@ Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 # Components: main restricted universe multiverse
 # Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 
-# # Types: deb-src
-# # URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu
-# # Suites: $(lsb_release -sc)-proposed
-# # Components: main restricted universe multiverse
-# # Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+# Types: deb-src
+# URIs: https://mirrors.tuna.tsinghua.edu.cn/ubuntu
+# Suites: $(lsb_release -sc)-proposed
+# Components: main restricted universe multiverse
+# Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 EOF
 
 apt-get update
 apt-get install -y \
   bash-completion \
   iputils-ping \
+  iproute2 \
   wget \
   curl \
-  iproute2 \
   vim \
   git \
   cmake \

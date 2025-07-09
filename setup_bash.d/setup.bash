@@ -1,6 +1,5 @@
 #!/bin/bash
 
-echo "\$0: $0"
 echo "'dirname': $(dirname $0)"
 cd $(dirname $0)
 
